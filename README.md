@@ -1,4 +1,4 @@
-# Godot Engine Cooky's Additon's
+# Godot Engine Cooky's Addition's
 
 
 Added wildcard keywords that act like empty lines,
