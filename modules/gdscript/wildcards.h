@@ -36,9 +36,8 @@ class Wildcards {
 		return editor_keys;
 	}
 
-	static void parser(const String &source_code) {
+	static void parser(String &source) {
 		
-		String source = source_code;
 		PackedStringArray lines = source.split("\n", true);
 
 		for (int index = 0; index < lines.size(); index++) {
