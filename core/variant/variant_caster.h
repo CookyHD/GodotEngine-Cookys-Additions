@@ -46,6 +46,9 @@ enum class Key;
 enum class KeyModifierMask;
 enum class KeyLocation;
 
+enum class JoyPowerState;
+enum class JoyConnectionState;
+
 // Variant cannot define an implicit cast operator for every Object subclass, so the
 // casting is done here, to allow binding methods with parameters more specific than Object *
 
@@ -117,6 +120,9 @@ VARIANT_ENUM_CAST(PropertyHint);
 VARIANT_BITFIELD_CAST(PropertyUsageFlags);
 VARIANT_ENUM_CAST(Variant::Type);
 VARIANT_ENUM_CAST(Variant::Operator);
+
+VARIANT_ENUM_CAST(JoyPowerState);
+VARIANT_ENUM_CAST(JoyConnectionState);
 
 // Key
 

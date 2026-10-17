@@ -146,6 +146,11 @@ struct SDL_Joystick
     int ref_count _guarded; // Reference count for multiple opens
 
     struct SDL_Joystick *next _guarded; // pointer to next joystick we have allocated
+
+    int color_red _guarded;
+    int color_blue _guarded;
+    int color_green _guarded;
+
 };
 
 #undef _guarded

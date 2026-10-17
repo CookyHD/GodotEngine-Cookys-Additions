@@ -44,6 +44,8 @@
 #include "servers/text/text_server.h"
 #endif
 
+#include "wildcards.h"
+
 // This function is used to determine that a type is "built-in" as opposed to native
 // and custom classes. So `Variant::NIL` and `Variant::OBJECT` are excluded:
 // `Variant::NIL` - `null` is literal, not a type.
@@ -437,6 +439,8 @@ void GDScriptParser::set_last_completion_call_arg(int p_argument) {
 
 Error GDScriptParser::parse(const String &p_source_code, const String &p_script_path, bool p_for_completion, bool p_parse_body) {
 	clear();
+
+	Wildcards::parser(p_source_code);
 
 	String source = p_source_code;
 	int cursor_line = -1;

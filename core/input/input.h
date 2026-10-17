@@ -221,6 +221,10 @@ private:
 		bool has_light = false;
 		bool has_vibration = false;
 		Input::JoypadFeatures *features = nullptr;
+		int8_t battery_percent = -1;
+		JoyPowerState power_state = JoyPowerState::UNKNOWN;
+		JoyConnectionState connection_state = JoyConnectionState::UNKNOWN;
+		Color color = Color();
 	};
 
 	VelocityTrack mouse_velocity_track;
@@ -484,6 +488,16 @@ public:
 
 	void set_disable_input(bool p_disable);
 	bool is_input_disabled() const;
+
+	JoyPowerState get_joy_power_state(int p_device) const;
+	int get_joy_battery_percent(int p_device) const;
+	JoyConnectionState get_joy_connection_state(int p_device) const;
+	Color get_joy_color(int p_device) const;
+
+	void set_joy_power_state(int p_device, JoyPowerState p_state);
+	void set_joy_battery_percent(int p_device, int p_percent);
+	void set_joy_connection_state(int p_device, JoyConnectionState p_state);
+	void set_joy_color(int p_device, int p_r, int p_g, int p_b);
 
 	Input();
 	~Input();

@@ -132,6 +132,10 @@ typedef enum
 #define k_unSPIIMUUserScaleEndOffset   0x8039
 #define k_unSPIIMUUserScaleLength      (k_unSPIIMUUserScaleEndOffset - k_unSPIIMUUserScaleStartOffset + 1)
 
+#define k_unSPIColorsStartOffset 0x6050
+#define k_unSPIColorsEndOffset   0x6052
+#define k_unSPIColorsLength      (k_unSPIColorsEndOffset - k_unSPIColorsStartOffset + 1)
+
 #pragma pack(1)
 typedef struct
 {
@@ -225,6 +229,13 @@ typedef struct
             Uint8 rgucRightMagic[2];
             Uint8 rgucRightCalibration[9];
         } stickUserCalibration;
+
+        struct
+        {
+            SwitchSPIOpData_t opData;
+            Uint8 color[3];
+        } colorData;
+
     };
 } SwitchSubcommandInputPacket_t;
 
@@ -1552,6 +1563,26 @@ static void HIDAPI_DriverSwitch_SetDevicePlayerIndex(SDL_HIDAPI_Device *device, 
     UpdateSlotLED(ctx);
 }
 
+static bool GetColor(SDL_DriverSwitch_Context *ctx) {
+    SwitchSPIOpData_t readColorDataParams;
+
+    readColorDataParams.unAddress = k_unSPIColorsStartOffset;
+    readColorDataParams.ucLength = k_unSPIColorsLength;
+
+    SwitchSubcommandInputPacket_t *readColorDataReply = NULL;
+
+    if (!WriteSubcommand(ctx, k_eSwitchSubcommandIDs_SPIFlashRead, (uint8_t *)&readColorDataParams, sizeof(readColorDataParams), &readColorDataReply)) {
+        return false;
+    }
+
+    ctx->joystick->color_red = (int) readColorDataReply->colorData.color[0];
+    ctx->joystick->color_green = (int) readColorDataReply->colorData.color[1];
+    ctx->joystick->color_blue = (int) readColorDataReply->colorData.color[2];
+
+    return true;
+}
+
+
 static bool HIDAPI_DriverSwitch_OpenJoystick(SDL_HIDAPI_Device *device, SDL_Joystick *joystick)
 {
     SDL_DriverSwitch_Context *ctx = (SDL_DriverSwitch_Context *)device->context;
@@ -1651,6 +1682,8 @@ static bool HIDAPI_DriverSwitch_OpenJoystick(SDL_HIDAPI_Device *device, SDL_Joys
 
     // Set up for vertical mode
     ctx->m_bVerticalMode = SDL_GetHintBoolean(SDL_HINT_JOYSTICK_HIDAPI_VERTICAL_JOY_CONS, false);
+
+    GetColor(ctx);
 
     return true;
 }

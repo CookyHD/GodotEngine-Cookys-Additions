@@ -1,14 +1,14 @@
 # Godot Engine Cooky's Addition's
 
 
-Added wildcard keywords that act like empty lines,
+Added wildcard keywords that act's like a empty line,
 I added this Purly for readability for myself!
 
 
 Example:
 
 
-![example](https://github.com/cookyhd/godot-cookys-addition/blob/additions/wildcard_image.png?raw=true)
+![example](https://github.com/cookyhd/godot-cookys-addition/blob/additions/misc/wildcard_image.png?raw=true)
 
 
 Also added some pull requests for certain Joypad/SDL3 functions:

@@ -1193,6 +1193,10 @@ extern SDL_DECLSPEC SDL_JoystickConnectionState SDLCALL SDL_GetJoystickConnectio
  */
 extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetJoystickPowerInfo(SDL_Joystick *joystick, int *percent);
 
+extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickColor_Red(SDL_Joystick *joystick);
+extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickColor_Green(SDL_Joystick *joystick);
+extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickColor_Blue(SDL_Joystick *joystick);
+
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus
 }

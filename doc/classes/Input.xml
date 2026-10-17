@@ -828,6 +828,38 @@
 				[b]Note:[/b] [method warp_mouse] is only supported on Windows, macOS and Linux. It has no effect on Android, iOS and Web.
 			</description>
 		</method>
+		<method name="get_joy_battery_percent" qualifiers="const" experimental="">
+			<return type="int" />
+			<param index="0" name="device" type="int" />
+			<description>
+				Returns the battery percentage of the requested joypad, if available.
+				[b]Note:[/b] This feature is only supported on Windows, Linux, and macOS.
+			</description>
+		</method>
+		<method name="get_joy_connection_state" qualifiers="const" experimental="">
+			<return type="int" enum="JoyConnectionState" />
+			<param index="0" name="device" type="int" />
+			<description>
+				Returns the joypad's connection state (i.e. if it's wired or wireless).
+				[b]Note:[/b] This feature is only supported on Windows, Linux, and macOS.
+			</description>
+		</method>
+		<method name="get_joy_power_state" qualifiers="const" experimental="">
+			<return type="int" enum="JoyPowerState" />
+			<param index="0" name="device" type="int" />
+			<description>
+				Returns the joypad's power state (i.e. if it's currently charging, being used on battery, etc.).
+				[b]Note:[/b] This feature is only supported on Windows, Linux, and macOS.
+			</description>
+		</method>
+		<method name="get_joy_color" qualifiers="const" experimental="">
+			<return type="Color"/>
+			<param index="0" name="device" type="int" />
+			<description>
+				Returns the joypad's Color (Supported by Switch Joycons.).
+				[b]Note:[/b] This feature is only supported on Windows.
+			</description>
+		</method>
 	</methods>
 	<members>
 		<member name="emulate_mouse_from_touch" type="bool" setter="set_emulate_mouse_from_touch" getter="is_emulating_mouse_from_touch">
@@ -928,6 +960,30 @@
 		</constant>
 		<constant name="CURSOR_HELP" value="16" enum="CursorShape">
 			Help cursor. Usually a question mark.
+		</constant>
+		<constant name="JOY_POWER_UNKNOWN" value="0" enum="JoyPowerState">
+			An invalid or unknown joypad power state.
+		</constant>
+		<constant name="JOY_POWER_ON_BATTERY" value="1" enum="JoyPowerState">
+			The joypad is not plugged in and is running on the battery.
+		</constant>
+		<constant name="JOY_POWER_NO_BATTERY" value="2" enum="JoyPowerState">
+			The joypad is plugged in and has no battery available.
+		</constant>
+		<constant name="JOY_POWER_CHARGING" value="3" enum="JoyPowerState">
+			The joypad is plugged in and its battery is currently charging.
+		</constant>
+		<constant name="JOY_POWER_FULL_BATTERY" value="4" enum="JoyPowerState">
+			The joypad is plugged in and its battery is fully charged.
+		</constant>
+		<constant name="JOY_CONNECTION_UNKNOWN" value="0" enum="JoyConnectionState">
+			An invalid or unknown joypad connection state.
+		</constant>
+		<constant name="JOY_CONNECTION_WIRED" value="1" enum="JoyConnectionState">
+			The joypad is currently using a wired connection to the device.
+		</constant>
+		<constant name="JOY_CONNECTION_WIRELESS" value="2" enum="JoyConnectionState">
+			The joypad is currently using a wireless connection to the device.
 		</constant>
 	</constants>
 </class>

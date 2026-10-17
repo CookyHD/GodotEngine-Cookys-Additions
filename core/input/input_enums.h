@@ -166,3 +166,17 @@ constexpr MouseButtonMask operator|(MouseButtonMask p_a, MouseButtonMask p_b) {
 constexpr MouseButtonMask &operator|=(MouseButtonMask &p_a, MouseButtonMask p_b) {
 	return p_a = p_a | p_b;
 }
+
+enum class JoyPowerState {
+	UNKNOWN = 0,
+	ON_BATTERY = 1,
+	NO_BATTERY = 2,
+	CHARGING = 3,
+	FULL_BATTERY = 4,
+};
+
+enum class JoyConnectionState {
+	UNKNOWN = 0,
+	WIRED = 1,
+	WIRELESS = 2,
+};

@@ -3808,3 +3808,48 @@ void SDL_FreeVIDPIDList(SDL_vidpid_list *list)
 
     list->initialized = false;
 }
+
+int SDL_GetJoystickColor_Red(SDL_Joystick *joystick)
+{
+    int result;
+
+    SDL_LockJoysticks();
+    {
+        CHECK_JOYSTICK_MAGIC(joystick, 0);
+
+        result = joystick->color_red;
+    }
+    SDL_UnlockJoysticks();
+
+    return result;
+}
+
+int SDL_GetJoystickColor_Green(SDL_Joystick *joystick)
+{
+    int result;
+
+    SDL_LockJoysticks();
+    {
+        CHECK_JOYSTICK_MAGIC(joystick, 0);
+
+        result = joystick->color_green;
+    }
+    SDL_UnlockJoysticks();
+
+    return result;
+}
+
+int SDL_GetJoystickColor_Blue(SDL_Joystick *joystick)
+{
+    int result;
+
+    SDL_LockJoysticks();
+    {
+        CHECK_JOYSTICK_MAGIC(joystick, 0);
+
+        result = joystick->color_blue;
+    }
+    SDL_UnlockJoysticks();
+
+    return result;
+}

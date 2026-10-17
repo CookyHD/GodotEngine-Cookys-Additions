@@ -39,6 +39,8 @@
 #include "editor/settings/editor_settings.h"
 #include "scene/gui/text_edit.h"
 
+#include "modules/gdscript/wildcards.h"
+
 Dictionary GDScriptSyntaxHighlighter::_get_line_syntax_highlighting_impl(int p_line) {
 	Dictionary color_map;
 
@@ -737,6 +739,9 @@ Dictionary GDScriptSyntaxHighlighter::_get_line_syntax_highlighting_impl(int p_l
 			color_map[j] = highlighter_info;
 		}
 	}
+
+	Wildcards::highlight(text_edit, color_map, p_line);
+
 	return color_map;
 }
 

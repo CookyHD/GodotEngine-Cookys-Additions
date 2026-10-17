@@ -204,6 +204,10 @@ void Input::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("is_emulating_mouse_from_touch"), &Input::is_emulating_mouse_from_touch);
 	ClassDB::bind_method(D_METHOD("set_emulate_touch_from_mouse", "enable"), &Input::set_emulate_touch_from_mouse);
 	ClassDB::bind_method(D_METHOD("is_emulating_touch_from_mouse"), &Input::is_emulating_touch_from_mouse);
+	ClassDB::bind_method(D_METHOD("get_joy_power_state", "device"), &Input::get_joy_power_state);
+	ClassDB::bind_method(D_METHOD("get_joy_battery_percent", "device"), &Input::get_joy_battery_percent);
+	ClassDB::bind_method(D_METHOD("get_joy_connection_state", "device"), &Input::get_joy_connection_state);
+	ClassDB::bind_method(D_METHOD("get_joy_color", "device"), &Input::get_joy_color);
 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouse_mode"), "set_mouse_mode", "get_mouse_mode");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "use_accumulated_input"), "set_use_accumulated_input", "is_using_accumulated_input");
@@ -2315,6 +2319,81 @@ void Input::set_disable_input(bool p_disable) {
 
 bool Input::is_input_disabled() const {
 	return disable_input;
+}
+
+void Input::set_joy_power_state(int p_device, JoyPowerState p_state) {
+	_THREAD_SAFE_METHOD_
+	Joypad *joypad = joy_names.getptr(p_device);
+	if (joypad == nullptr) {
+		return;
+	}
+	joypad->power_state = p_state;
+}
+
+void Input::set_joy_battery_percent(int p_device, int p_percent) {
+	_THREAD_SAFE_METHOD_
+	Joypad *joypad = joy_names.getptr(p_device);
+	if (joypad == nullptr || p_percent < -1 || p_percent > 100) {
+		return;
+	}
+	joypad->battery_percent = p_percent;
+}
+
+void Input::set_joy_connection_state(int p_device, JoyConnectionState p_state) {
+	_THREAD_SAFE_METHOD_
+	Joypad *joypad = joy_names.getptr(p_device);
+	if (joypad == nullptr) {
+		return;
+	}
+	joypad->connection_state = p_state;
+}
+
+void Input::set_joy_color(int p_device, int p_r, int p_g, int p_b) {
+	_THREAD_SAFE_METHOD_
+	Joypad *joypad = joy_names.getptr(p_device);
+	if (joypad == nullptr) {
+		return;
+	}
+	joypad->color.r = (((float) p_r) / 255.0f);
+	joypad->color.g = (((float) p_g) / 255.0f);
+	joypad->color.b = (((float) p_b) / 255.0f);
+}
+
+JoyPowerState Input::get_joy_power_state(int p_device) const {
+	_THREAD_SAFE_METHOD_
+	const Joypad *joypad = joy_names.getptr(p_device);
+	if (joypad == nullptr) {
+		return JoyPowerState::UNKNOWN;
+	}
+	return joypad->power_state;
+}
+
+int Input::get_joy_battery_percent(int p_device) const {
+	_THREAD_SAFE_METHOD_
+	const Joypad *joypad = joy_names.getptr(p_device);
+	if (joypad == nullptr) {
+		return -1;
+	}
+	return joypad->battery_percent;
+}
+
+JoyConnectionState Input::get_joy_connection_state(int p_device) const {
+	_THREAD_SAFE_METHOD_
+	const Joypad *joypad = joy_names.getptr(p_device);
+	if (joypad == nullptr) {
+		return JoyConnectionState::UNKNOWN;
+	}
+	return joypad->connection_state;
+}
+
+Color Input::get_joy_color(int p_device) const {
+	_THREAD_SAFE_METHOD_
+	const Joypad *joypad = joy_names.getptr(p_device);
+	if (joypad == nullptr) {
+		Color color;
+		return color;
+	}
+	return joypad->color;
 }
 
 Input::Input() {

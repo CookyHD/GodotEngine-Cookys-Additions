@@ -64,6 +64,8 @@
 
 #include "modules/regex/regex.h"
 
+#include "modules/gdscript/wildcards.h"
+
 // PRIVATE METHODS
 
 Ref<EditorSettings> EditorSettings::singleton = nullptr;
@@ -771,6 +773,11 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 	_initial_set("text_editor/theme/highlighting/comment_markers/critical_list", "ALERT,ATTENTION,CAUTION,CRITICAL,DANGER,SECURITY");
 	_initial_set("text_editor/theme/highlighting/comment_markers/warning_list", "BUG,DEPRECATED,FIXME,HACK,TASK,TBD,TODO,WARNING");
 	_initial_set("text_editor/theme/highlighting/comment_markers/notice_list", "INFO,NOTE,NOTICE,TEST,TESTING");
+
+	// Wildcards Addition
+	for (String wildcard : Wildcards::editor_keys()) {
+		EDITOR_SETTING_BASIC(Variant::COLOR, PROPERTY_HINT_COLOR_NO_ALPHA, wildcard, Color(0.431f, 0.388f, 0.882f), "")
+	}
 
 	// Appearance
 	EDITOR_SETTING_BASIC(Variant::BOOL, PROPERTY_HINT_NONE, "text_editor/appearance/enable_inline_color_picker", true, "");
