@@ -1,15 +1,17 @@
 # Godot Engine Cooky's Additon's
 
 
-Added Wildcard Keywords that act Like Empty Lines,
-I added this Purly for Readabilty for Myself!
+Added wildcard keywords that act like empty lines,
+I added this Purly for readability for myself!
 
 
 Example:
+
+
 ![example](https://github.com/cookyhd/godot-cookys-addition/blob/additions/wildcard_image.png?raw=true)
 
 
-Also Added Some pull request for cetin Joypad/SDL Functions:
+Also added some pull requests for certain Joypad/SDL3 functions:
 
 
 [Add support for getting a joypad's battery and connection information](https://github.com/godotengine/godot-proposals/issues/14482)
