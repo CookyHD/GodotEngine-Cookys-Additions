@@ -19,7 +19,7 @@ Also added some pull requests and proposals related to SDL3 (Joypad) functionali
 [Add support for getting a joypad's battery and connection information](https://github.com/godotengine/godot-proposals/issues/14482) by [Nintorch](https://github.com/Nintorch)
 
 
-[Supporting Joystick Colors (Joy-Cons + Pro Controller)](https://github.com/libsdl-org/SDL/issues/12167) by [folkerthoogenraad](https://github.com/folkerthoogenraad)
+[Supporting Joystick Colors (Joy-Cons + Pro Controller)](https://github.com/libsdl-org/SDL/issues/12167) by [JustF](https://github.com/folkerthoogenraad)
 
 ---
 
