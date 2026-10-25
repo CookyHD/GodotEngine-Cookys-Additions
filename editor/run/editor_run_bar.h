@@ -108,6 +108,7 @@ class EditorRunBar : public MarginContainer {
 	void _profiler_autostart_indicator_pressed();
 
 private:
+	void hide_play_button(Button *button, String include = "");
 	static Vector<String> _get_xr_mode_play_args(RunXRModeMenuItem p_menu_item);
 
 protected:

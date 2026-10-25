@@ -2,6 +2,10 @@
 
 A collection of additions for the [Godot Engine](https://github.com/godotengine/godot).
 
+## Hideable Play Buttons
+
+Editor Option for Hiding Play Buttons in the Top-Right Corner of the Editor.
+
 ## Wildcard Keywords
 
 Added wildcard keywords that act like empty lines to improve readability and make scripts easier to organize.

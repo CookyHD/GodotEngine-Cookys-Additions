@@ -779,6 +779,11 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 		EDITOR_SETTING_BASIC(Variant::COLOR, PROPERTY_HINT_COLOR_NO_ALPHA, wildcard, Color(0.431f, 0.388f, 0.882f), "")
 	}
 
+	//Editor Button Addition
+	EDITOR_SETTING_BASIC(Variant::BOOL, PROPERTY_HINT_NONE, "interface/editor/play_buttons/hide_unnessesary", false, "");
+	EDITOR_SETTING_BASIC(Variant::BOOL, PROPERTY_HINT_NONE, "interface/editor/play_buttons/include_pause", true, "");
+	EDITOR_SETTING_BASIC(Variant::BOOL, PROPERTY_HINT_NONE, "interface/editor/play_buttons/include_play_scene", true, "");
+
 	// Appearance
 	EDITOR_SETTING_BASIC(Variant::BOOL, PROPERTY_HINT_NONE, "text_editor/appearance/enable_inline_color_picker", true, "");
 

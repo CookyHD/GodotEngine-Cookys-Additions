@@ -33,6 +33,7 @@
 #include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/object/callable_mp.h"
+#include "core/string/ustring.h"
 #include "editor/debugger/editor_debugger_node.h"
 #include "editor/debugger/script_editor_debugger.h"
 #include "editor/editor_node.h"
@@ -51,6 +52,7 @@
 #include "scene/gui/button.h"
 #include "scene/gui/menu_button.h"
 #include "scene/gui/panel_container.h"
+#include "scene/main/node.h"
 #include "scene/main/scene_tree.h"
 
 #ifndef XR_DISABLED
@@ -69,6 +71,16 @@ void EditorRunBar::_notification(int p_what) {
 			if (Engine::get_singleton()->is_recovery_mode_hint()) {
 				recovery_mode_show_dialog();
 			}
+		} break;
+
+		case NOTIFICATION_PROCESS: {
+			if (Engine::get_singleton()->is_recovery_mode_hint()) {
+				return;
+			}
+			hide_play_button(pause_button, "interface/editor/play_buttons/include_pause");
+			hide_play_button(play_scene_button, "interface/editor/play_buttons/include_play_scene");
+			hide_play_button(play_custom_scene_button);
+			hide_play_button(write_movie_button);
 		} break;
 
 		case NOTIFICATION_THEME_CHANGED: {
@@ -724,4 +736,22 @@ EditorRunBar::EditorRunBar() {
 	write_movie_button->set_tooltip_text(TTRC("Enable Movie Maker mode.\nThe project will run at stable FPS and the visual and audio output will be recorded to a video file."));
 	write_movie_button->set_accessibility_name(TTRC("Enable Movie Maker Mode"));
 	write_movie_button->set_flat(false);
+
+	set_process(true);
+}
+
+void EditorRunBar::hide_play_button(Button *button, String include) {
+	bool enabled = EDITOR_GET("interface/editor/play_buttons/hide_unnessesary");
+	if (!include.is_empty()) {
+		bool include_enabled = EDITOR_GET(include);
+		if (!include_enabled) {
+			button->show();
+			return;
+		}
+	}
+	if (enabled) {
+		button->hide();
+		return;
+	}
+	button->show();
 }
